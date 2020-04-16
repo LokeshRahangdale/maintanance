@@ -1,0 +1,122 @@
+{% if request.session %}
+    {% load staticfiles %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Maintenance Monitoring</title>
+  </head>
+  <body>
+    <table align="center" border="0" width="900">
+        <tr>
+            <th>
+                {% include 'head.html' %}
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <table align="center">
+        <tr>
+            <th>
+                <form action="{% url 'index' %}">
+                    <button type="submit" class="btn btn-primary">HOME</button>----
+                </form>
+            </th>
+            <th>
+                <form action="{% url 'technician/complaint_all'  %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">All Complaint</button>----
+                </form>
+            </th>
+            <th>
+                <form action="{% url 'technician/solved_complaint' %}" method="post">
+                    {% csrf_token %}
+                 <button type="submit" class="btn btn-primary">Solved Complaint</button>----
+                </form>
+            </th>
+            <th>
+                <form action="{% url 'technician/logout' %}">
+                <button type="submit" class="btn btn-success">Logout</button></form>
+            </th>
+
+
+{#                <button type="button" class="btn btn-outline-success">ADMIN</button>---#}
+{#                <button type="button" class="btn btn-outline-success">ABOUT US</button>---#}
+{#                <button type="button" class="btn btn-outline-success">CONTACT US</button>#}
+        </tr>
+
+    </table>
+            </th>
+        </tr>
+        <tr>
+            <th>
+
+            </th>
+        </tr>
+
+
+    </table>
+    {% if data %}
+    <table align="center" border="2" style="margin-top: 50px">
+       <tr>
+           <th><h4>System Number</h4></th>
+           <th><h4>Lab Name</h4></th>
+           <th><h4>Department Name</h4></th>
+           <th><h4>Status</h4></th>
+           <th><h4>Issue</h4></th>
+       </tr>
+
+
+            {% for x in data %}
+                <tr>
+                <th><h4>{{ x.sys_no }}</h4></th>
+                <th><h4>{{ x.lab_name }}</h4></th>
+                <th><h4>{{ x.d_name }}</h4></th>
+                <th><h4>{{ x.status }}</h4></th>
+                <th><h4>{{ x.issue }}</h4></th>
+                </tr>
+            {% endfor %}
+
+    </table>
+
+   {% endif %}
+    {% if solved_data %}
+    <table align="center" border="2" style="margin-top: 50px">
+       <tr>
+           <th><h4>System Number</h4></th>
+           <th><h4>Lab Name</h4></th>
+           <th><h4>Department Name</h4></th>
+           <th><h4>Status</h4></th>
+           <th><h4>Issue</h4></th>
+       </tr>
+
+
+            {% for x in solved_data %}
+                <tr>
+                <th><h4>{{ x.sys_no }}</h4></th>
+                <th><h4>{{ x.lab_name }}</h4></th>
+                <th><h4>{{ x.d_name }}</h4></th>
+                <th><h4>{{ x.status }}</h4></th>
+                <th><h4>{{ x.issue }}</h4></th>
+                </tr>
+            {% endfor %}
+
+    </table>
+
+
+   {% endif %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% endif %}
